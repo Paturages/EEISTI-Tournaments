@@ -1,21 +1,29 @@
-## Lumen PHP Framework
+# EEISTI-Tournaments
+Tournament signup interface in PHP (Laravel Lumen). This is an early mostly working alpha which still needs refining.
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+## Requirements
+This project is built on the [Laravel Lumen](http://lumen.laravel.com/) framework. As such, it requires **PHP >=5.4**.  
+To build this project, use `composer` to get all the dependencies.  
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Next step: the `.env` file. An example has been provided in `.env.example`: you should hook up your own credentials and rename the file to `.env`.  
 
-## Official Documentation
+Afterwards, create the database with `/resources/db/create.sql`. I haven't gotten around automating the creation yet, we'll see how that goes. This has been tested with SQLite 3.  
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+You might want to create some games that people can sign up for: *well*, the administration interface... isn't done yet, so you will have to insert games manually via SQL for now.
 
-## Security Vulnerabilities
+## Features
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- API for CRUD operations on entries
+- Main interface in one page with jQuery interactivity (taking advantage of the API)
+- *Light* interface rendered with PHP (has its own controllers)
+- Sign up confirmation by e-mail
+- Entry "authentication" for editing, deleting and confirming
 
-### License
+## To do
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+- Administration interface
+- Cleaning up the jQuery code (lots of ugliness)
+- Adding custom fields feature
+- Probably clean up the PHP code too
+- Tests
+- Other features than signing up ?
