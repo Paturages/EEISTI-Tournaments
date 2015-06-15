@@ -1,0 +1,28 @@
+header, main, footer {
+    padding-left: 240px;
+}
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+i.circle {
+    display: block;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.team-player, .switch {
+    padding-bottom: 21px !important;
+}
+#team-player-template {
+    display: none;
+}
+.collapsible-body {
+    padding-left: 10px;
+}
+#solo-errors, #team-errors, #verify-errors {
+    color: red;
+}
