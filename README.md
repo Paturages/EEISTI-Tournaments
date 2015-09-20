@@ -3,7 +3,7 @@ Tournament signup interface in PHP (Laravel Lumen). This is an early mostly work
 
 ## Requirements
 This project is built on the [Laravel Lumen](http://lumen.laravel.com/) framework. As such, it requires **PHP >=5.4**.  
-To build this project, use `composer` to get all the dependencies.  
+To build this project, use `composer` to get all the dependencies. As with Laravel/Lumen projects, you will have to create a new server entry on Nginx or a VirtualHost on Apache pointing to the public folder.  
 
 Next step: the `.env` file. An example has been provided in `.env.example`: you should hook up your own credentials and rename the file to `.env`.  
 
