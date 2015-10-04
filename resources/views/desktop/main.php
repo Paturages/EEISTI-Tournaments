@@ -35,125 +35,141 @@
     </main>
 
     <div id="solo-form" class="modal">
-    <div class="modal-content">
-        <h4>Inscription</h4>
-        <div id="solo-errors"></div>
-        <div class="input-field">
-            <label for="solo-real-name">Nom</label>
-            <input type="text" id="solo-real-name" name="solo-real-name" />
-        </div>
-        <div class="input-field">
-            <label for="solo-name" id="solo-nickname-field">Pseudonyme</label>
-            <input type="text" id="solo-name" name="solo-name" />
-        </div>
-        <div class="row input-field" id="solo-campus">
-            <label>Campus</label><br/><br/>
-            <div class="col s3">
-                <input type="radio" name="solo-campus" id="solo-cergy" value="Cergy" />
-                <label for="solo-cergy">Cergy</label>
+        <div class="modal-content">
+            <h4>Inscription</h4>
+            <div id="solo-errors"></div>
+            <div class="input-field">
+                <label for="solo-real-name">Nom</label>
+                <input type="text" id="solo-real-name" name="solo-real-name" />
             </div>
-            <div class="col s3">
-                <input type="radio" name="solo-campus" id="solo-pau" value="Pau" />
-                <label for="solo-pau">Pau</label>
+            <div class="input-field">
+                <label for="solo-name" id="solo-nickname-field">Pseudonyme</label>
+                <input type="text" id="solo-name" name="solo-name" />
+            </div>
+            <div class="row input-field" id="solo-campus">
+                <label>Campus</label><br/><br/>
+                <div class="col s3">
+                    <input type="radio" name="solo-campus" id="solo-cergy" value="Cergy" />
+                    <label for="solo-cergy">Cergy</label>
+                </div>
+                <div class="col s3">
+                    <input type="radio" name="solo-campus" id="solo-pau" value="Pau" />
+                    <label for="solo-pau">Pau</label>
+                </div>
+            </div>
+            <br/>
+            <p>Un code sera fourni par e-mail pour confirmation de l'inscription.</p>
+            <div class="input-field" id="solo-email-field">
+                <label for="solo-email">E-mail</label>
+                <input type="email" name="solo-email" id="solo-email" />
+            </div>
+            <div class="input-field" id="solo-password-field">
+                <label for="solo-password">Code</label>
+                <input type="password" name="solo-password" id="solo-password" />
             </div>
         </div>
-        <br/>
-        <p>Un code sera fourni par e-mail pour confirmation de l'inscription.</p>
-        <div class="input-field" id="solo-email-field">
-            <label for="solo-email">E-mail</label>
-            <input type="email" name="solo-email" id="solo-email" />
+        <div class="modal-footer">
+            <a id="solo-submit" href="#!" class="modal-action waves-effect waves-green btn-flat">Valider</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
         </div>
-        <div class="input-field" id="solo-password-field">
-            <label for="solo-password">Code</label>
-            <input type="password" name="solo-password" id="solo-password" />
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a id="solo-submit" href="#!" class="modal-action waves-effect waves-green btn-flat">Valider</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
-    </div>
     </div>
 
     <div id="team-form" class="modal">
-    <div class="modal-content">
-        <h4>Inscription</h4>
-        <div id="team-errors"></div>
-        <div class="input-field">
-            <label for="team-name">Nom de l'équipe</label>
-            <input type="text" id="team-name" name="team-name" />
-        </div>
-        <div class="row input-field" id="team-campus">
-            <label>Campus</label><br/><br/>
-            <div class="col s3">
-                <input type="radio" name="team-campus" id="team-cergy" value="Cergy" />
-                <label for="team-cergy">Cergy</label>
+        <div class="modal-content">
+            <h4>Inscription</h4>
+            <div id="team-errors"></div>
+            <div class="input-field">
+                <label for="team-name">Nom de l'équipe</label>
+                <input type="text" id="team-name" name="team-name" />
             </div>
-            <div class="col s3">
-                <input type="radio" name="team-campus" id="team-pau" value="Pau" />
-                <label for="team-pau">Pau</label>
-            </div>
-            <div class="col s3">
-                <input type="radio" name="team-campus" id="team-mixte" value="Mixte" />
-                <label for="team-mixte">Mixte</label>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col s6">
-                <h5>Joueurs</h5>
-            </div>
-            <div class="col s6">
-                <button class="btn right player-add"><i class="mdi-social-group-add left"></i> Ajouter joueur</button>
-            </div>
-        </div>
-        <div class="row" id="team-players"></div>
-        <div id="team-player-template">
-            <div class="col s6 m3 team-player">
-                <label>Joueur 1</label>
-                <div class="input-field">
-                    <label for="player-real-name-1">Nom</label>
-                    <input type="text" id="player-real-name-1" class="player-real-name"/>
+            <div class="row input-field" id="team-campus">
+                <label>Campus</label><br/><br/>
+                <div class="col s3">
+                    <input type="radio" name="team-campus" id="team-cergy" value="Cergy" />
+                    <label for="team-cergy">Cergy</label>
                 </div>
-                <div class="input-field">
-                    <label class="player-nickname-field" for="player-name-1">Pseudonyme</label>
-                    <input type="text" id="player-name-1" class="player-name"/>
+                <div class="col s3">
+                    <input type="radio" name="team-campus" id="team-pau" value="Pau" />
+                    <label for="team-pau">Pau</label>
                 </div>
-                <div class="switch input-field">
-                    <label>Cergy<input type="checkbox" class="player-campus"><span class="lever"></span>Pau</label>
+                <div class="col s3">
+                    <input type="radio" name="team-campus" id="team-mixte" value="Mixte" />
+                    <label for="team-mixte">Mixte</label>
                 </div>
-                <br/><br/><button class="btn player-remove"><i class="mdi-content-remove left"></i> Retirer</button>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col s6">
+                    <h5>Joueurs</h5>
+                </div>
+                <div class="col s6">
+                    <button class="btn right player-add"><i class="mdi-social-group-add left"></i> Ajouter joueur</button>
+                </div>
+            </div>
+            <div class="row" id="team-players"></div>
+            <div id="team-player-template">
+                <div class="col s6 m3 team-player">
+                    <label>Joueur 1</label>
+                    <div class="input-field">
+                        <label for="player-real-name-1">Nom</label>
+                        <input type="text" id="player-real-name-1" class="player-real-name"/>
+                    </div>
+                    <div class="input-field">
+                        <label class="player-nickname-field" for="player-name-1">Pseudonyme</label>
+                        <input type="text" id="player-name-1" class="player-name"/>
+                    </div>
+                    <div class="switch input-field">
+                        <label>Cergy<input type="checkbox" class="player-campus"><span class="lever"></span>Pau</label>
+                    </div>
+                    <br/><br/><button class="btn player-remove"><i class="mdi-content-remove left"></i> Retirer</button>
+                </div>
+            </div>
+            <p>Un code sera fourni par e-mail pour confirmation de l'inscription.</p>
+            <div class="input-field" id="team-email-field">
+                <label for="team-email">E-mail</label>
+                <input type="email" name="team-email" id="team-email" />
+            </div>
+            <div class="input-field" id="team-password-field">
+                <label for="team-password">Code</label>
+                <input type="password" name="team-password" id="team-password" />
             </div>
         </div>
-        <p>Un code sera fourni par e-mail pour confirmation de l'inscription.</p>
-        <div class="input-field" id="team-email-field">
-            <label for="team-email">E-mail</label>
-            <input type="email" name="team-email" id="team-email" />
+        <div class="modal-footer">
+            <a href="#!" id="team-submit" class="modal-action waves-effect waves-green btn-flat">Valider</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
         </div>
-        <div class="input-field" id="team-password-field">
-            <label for="team-password">Code</label>
-            <input type="password" name="team-password" id="team-password" />
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" id="team-submit" class="modal-action waves-effect waves-green btn-flat">Valider</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
-    </div>
     </div>
 
     <div id="verify-form" class="modal">
-    <div class="modal-content">
-        <h4>Suppression</h4>
-        <div id="verify-errors"></div>
-        <p>Entrer le code donné à l'inscription par e-mail. <a href="#!" id="verify-forgot">Oublié ?</a></p>
-        <div class="input-field">
-            <label for="verify-password">Code</label>
-            <input type="password" name="verify-password" id="verify-password" />
+        <div class="modal-content">
+            <h4>Suppression</h4>
+            <div id="verify-errors"></div>
+            <p>Entrer le code donné à l'inscription par e-mail. <a href="#!" id="verify-forgot">Oublié ?</a></p>
+            <div class="input-field">
+                <label for="verify-password">Code</label>
+                <input type="password" name="verify-password" id="verify-password" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" id="verify-submit" class="modal-action waves-effect waves-green btn-flat">Valider</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
         </div>
     </div>
-    <div class="modal-footer">
-        <a href="#!" id="verify-submit" class="modal-action waves-effect waves-green btn-flat">Valider</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
-    </div>
+
+    <div id="forgot-form" class="modal">
+        <div class="modal-content">
+            <h4>Mot de passe oublié</h4>
+            <div id="forgot-errors"></div>
+            <p>Entrer l'adresse e-mail associée à cette inscription.</p>
+            <div class="input-field">
+                <label for="forgot-email">Email</label>
+                <input type="email" name="forgot-email" id="forgot-email" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" id="forgot-submit" class="modal-action waves-effect waves-green btn-flat">Valider</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

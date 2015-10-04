@@ -29,7 +29,7 @@ $app->post('/api/entries/create/{id_game}', 'App\Http\Controllers\Signups\EntryA
 $app->post('/api/entries/approve/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@approvePass');
 $app->post('/api/entries/edit/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@edit');
 $app->post('/api/entries/delete/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@deletePass');
-$app->get('/api/entries/forgot/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@forgot');
+$app->post('/api/entries/forgot/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@forgot');
 
 /* Admin API */
 /* TO DO: Wrap with Middleware */
@@ -49,7 +49,7 @@ $app->get('/light/delete/{id_entry}', 'App\Http\Controllers\Signups\LightControl
 $app->get('/light/delete/{id_entry}/{crpt_pass}', 'App\Http\Controllers\Signups\EntryAPIController@delete');
 $app->get('/light/verify/{id_entry}', 'App\Http\Controllers\Signups\LightController@getVerifyForm');
 $app->get('/light/verify/{id_entry}/{crpt_pass}', 'App\Http\Controllers\Signups\EntryAPIController@verify');
-$app->get('/light/forgot/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@forgot');
+$app->post('/light/forgot/{id_entry}', 'App\Http\Controllers\Signups\EntryAPIController@forgot');
 
 /* Validators */
 

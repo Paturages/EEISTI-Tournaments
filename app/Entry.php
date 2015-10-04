@@ -33,9 +33,9 @@ class Entry {
 		return $id;
 	}
 
-	static function getPassword($id, $new_password) {
+	static function getPassword($id, $email, $new_password) {
 		$entry = DB::select('SELECT name, email FROM Entries WHERE rowid=?', [$id]);
-		if (empty($entry))
+		if (empty($entry) || $entry[0]->email !== $email)
 			return null;
 		DB::update("UPDATE Entries SET password=? WHERE rowid=? AND id_team=?", [Hash::make($new_password), $id]);
 

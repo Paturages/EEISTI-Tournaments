@@ -43,19 +43,9 @@ var initializeForm = function() {
             $('#team-form p').html("Entrer le code donné à l'inscription par e-mail. ")
                 .append($('<a href="#!">Oublié ?</a>')
                     .click(function() {
-                        $("#team-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
-                        $.get('api/entries/forgot/'+edit_user.rowid, function() {
-                            $('.progress').remove();
-                            $('#team-form').closeModal();
-                            // For some reason, the 'complete' callback isn't called...
-                            edit_user = {};
-                            $("#team-errors").empty();
-                            $(":input[type=text]").val('');
-                            $(".player-campus").prop("checked", false);
-                            $("#team-players").empty();
-                            $("player-add").removeAttr("disabled");
-                            Materialize.toast("Un nouveau mot de passe a été envoyé par e-mail.", 5000);
-                        });
+                        $('#team-form').closeModal();
+                        triggerWhat = forgotSubmit;
+                        $('#forgot-form').openModal();
                     })
             );
             // Edit mode: prefill form
@@ -78,9 +68,12 @@ var initializeForm = function() {
             $('#team-campus, .switch').hide();
         else
             $('#team-campus, .switch').show();
+
+        triggerWhat = teamSubmit;
         $('#team-form').openModal({
             // On modal close...
             complete: function() {
+                triggerWhat = null;
                 edit_user = {};
                 $("#team-errors").empty();
                 $(":input[type=text]").val('');
@@ -103,17 +96,9 @@ var initializeForm = function() {
             $('#solo-form p').html("Entrer le code donné à l'inscription par e-mail. ")
                 .append($('<a href="#!">Oublié ?</a>')
                     .click(function() {
-                        $("#solo-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
-                        $.get('api/entries/forgot/'+edit_user.rowid, function() {
-                            $('.progress').remove();
-                            $('#solo-form').closeModal();
-                            // For some reason, the 'complete' callback isn't called...
-                            $('#solo-form label').removeClass("active");
-                            edit_user = {};
-                            $("#solo-errors").empty();
-                            $(":input[type=text]").val('');
-                            Materialize.toast("Un nouveau mot de passe a été envoyé par e-mail.", 5000);
-                        });
+                        $('#solo-form').closeModal();
+                        triggerWhat = forgotSubmit;
+                        $('#forgot-form').openModal();
                     })
             );
             // Edit mode: Prefill form
@@ -128,10 +113,13 @@ var initializeForm = function() {
             $('#solo-campus').hide();
         else
             $('#solo-campus').show();
+
+        triggerWhat = soloSubmit;
         $('#solo-form').openModal({
             complete: function() {
             // On modal close...
                 $('#solo-form label').removeClass("active");
+                triggerWhat = null;
                 edit_user = {};
                 $("#solo-errors").empty();
                 $(":input[type=text]").val('');
@@ -139,10 +127,18 @@ var initializeForm = function() {
         });
         $('#solo-form').scrollTop(0);
     }
-}
+};
+
+// Keypress initializing, for ENTER key presses in forms
+var triggerWhat = null;
+$(document).keypress(function(e) {
+    if (e.which == 13) {
+        triggerWhat();
+    }
+});
 
 // Form handling
-$("#solo-submit").click(function() {
+function soloSubmit() {
     $("#solo-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
     $("#solo-errors").empty();
     if ($.isEmptyObject(edit_user))
@@ -154,6 +150,7 @@ $("#solo-submit").click(function() {
         })
         .done(function() {
             $(".progress").remove();
+            triggerWhat = null;
             $("#solo-form").closeModal();
             // For some reason, the 'complete' modal callback isn't called...
             $('#solo-form label').removeClass("active");
@@ -179,6 +176,7 @@ $("#solo-submit").click(function() {
         })
         .done(function() {
             $(".progress").remove();
+            triggerWhat = null;
             $("#solo-form").closeModal();
             // For some reason, the 'complete' modal callback isn't called...
             $('#solo-form label').removeClass("active");
@@ -197,8 +195,10 @@ $("#solo-submit").click(function() {
             $("#solo-form").animate({scrollTop: 0}, 2000);
         })
         ;
-});
-$("#team-submit").click(function() {
+}
+$("#solo-submit").click(soloSubmit);
+
+function teamSubmit() {
     $("#team-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
     $("#team-errors").empty();
     var real_names = [];
@@ -220,6 +220,7 @@ $("#team-submit").click(function() {
         })
         .done(function() {
             $(".progress").remove();
+            triggerWhat = null;
             $("#team-form").closeModal();
             // For some reason, the 'complete' modal callback isn't called...
             edit_user = {};
@@ -251,6 +252,7 @@ $("#team-submit").click(function() {
         })
         .done(function() {
             $(".progress").remove();
+            triggerWhat = null;
             $("#team-form").closeModal();
             // For some reason, the 'complete' modal callback isn't called...
             edit_user = {};
@@ -271,8 +273,10 @@ $("#team-submit").click(function() {
             $("#team-form").animate({scrollTop: 0}, 2000);
         })
         ;
-});
-$('#verify-submit').click(function() {
+}
+$("#team-submit").click(teamSubmit);
+
+function verifySubmit() {
     $("#verify-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
     $("#verify-errors").empty();
     $.post('api/entries/delete/'+edit_user.rowid, {
@@ -280,6 +284,7 @@ $('#verify-submit').click(function() {
     })
     .done(function() {
         $(".progress").remove();
+        triggerWhat = null;
         $("#verify-form").closeModal();
         // For some reason, the 'complete' modal callback isn't called...
         edit_user = {};
@@ -298,7 +303,38 @@ $('#verify-submit').click(function() {
         $("#verify-errors").animate({scrollTop: 0}, 2000);
     })
     ;
-});
+}
+$('#verify-submit').click();
+
+function forgotSubmit() {
+    $("#forgot-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
+    $("#forgot-errors").empty();
+    $.post('api/entries/forgot/'+edit_user.rowid, {
+        email: $("#forgot-email").val()
+    })
+    .done(function() {
+        $(".progress").remove();
+        triggerWhat = null;
+        $("#forgot-form").closeModal();
+        // For some reason, the 'complete' modal callback isn't called...
+        edit_user = {};
+        $("#forgot-email").val('');
+        $("#forgot-errors").empty();
+        Materialize.toast("Un nouveau mot de passe a été envoyé par e-mail.", 3000);
+        $('#entries').empty();
+        if (current_game.num_players > 1)
+            getTeamEntries(current_game);
+        else
+            getSoloEntries(current_game);
+    })
+    .fail(function(data) {
+        $(".progress").remove();
+        $("#forgot-errors").append("<p>"+data.responseJSON[0]+"</p>");
+        $("#forgot-errors").animate({scrollTop: 0}, 2000);
+    })
+    ;
+}
+$("#forgot-submit").click(forgotSubmit);
 
 var dateFormat = function(time) {
     return time.toLocaleDateString() + ' ' + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
@@ -329,14 +365,14 @@ var getTeamEntries = function(game) {
                 });
                 l_delete = $('<td><a href="#"><i class="mdi-content-clear circle red"></i></a></td>').click(function() {
                     edit_user = team;
+
                     $('#verify-forgot').click(function() {
-                        $("#verify-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
-                        $.get('api/entries/forgot/'+edit_user.rowid, function() {
-                            $('.progress').remove();
-                            $('#verify-form').closeModal();
-                            Materialize.toast("Un nouveau mot de passe a été envoyé par e-mail.", 5000);
-                        });
+                        $('#verify-form').closeModal();
+                        triggerWhat = forgotSubmit;
+                        $('forgot-form').openModal();
                     });
+
+                    triggerWhat = verifySubmit;
                     $('#verify-form').openModal({
                         complete: function() {
                             edit_user = {};
@@ -366,14 +402,14 @@ var getSoloEntries = function(game) {
             });
             l_delete = $('<td><a href="#"><i class="mdi-content-clear circle red"></i></a></td>').click(function() {
                 edit_user = player;
+
                 $('#verify-forgot').click(function() {
-                    $("#verify-form .modal-content").append('<div class="progress"><div class="indeterminate"></div></div>');
-                    $.get('api/entries/forgot/'+edit_user.rowid, function() {
-                        $('.progress').remove();
-                        $('#verify-form').closeModal();
-                        Materialize.toast("Un nouveau mot de passe a été envoyé par e-mail.", 5000);
-                    });
+                    $('#verify-form').closeModal();
+                    triggerWhat = forgotSubmit;
+                    $('#forgot-form').openModal();
                 });
+
+                triggerWhat = verifySubmit;
                 $('#verify-form').openModal({
                     complete: function() {
                         edit_user = {};

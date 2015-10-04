@@ -23,6 +23,6 @@ i.circle {
 .collapsible-body {
     padding-left: 10px;
 }
-#solo-errors, #team-errors, #verify-errors {
+#solo-errors, #team-errors, #verify-errors, #forgot-errors {
     color: red;
 }

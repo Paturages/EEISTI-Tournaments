@@ -30,13 +30,16 @@ class EntryAPIController extends Controller {
 
     /* Re-send password if password forgotten */
     function forgot($id_entry, Request $req) {
+        $email = $req->input('email');
         $new_password = $this->generatePass();
-        $entry = Entry::getPassword($id_entry, $new_password);
+
+        $entry = Entry::getPassword($id_entry, $email, $new_password);
         if (empty($entry)) {
+            // If entry ID is not found, or email mismatch
             if ($req->is('light/*')) {
-                return redirect()->back()->with('errors', ["Entrée non existante."])->with('entry', $entry);
+                return redirect()->back()->with('errors', ["Données incorrectes. Veuillez réessayer."])->with('entry', $entry);
             }
-            return response()->json(["Entrée non existante."], 400);
+            return response()->json(["Données incorrectes. Veuillez réessayer."], 400);
         }
         Mail::send('email.forgot', ['password' => $new_password], function($message) use ($entry) {
             $message->to($entry->email)->subject('E-EISTI : Nouveau mot de passe pour '.$entry->name);
