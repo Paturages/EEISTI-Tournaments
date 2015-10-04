@@ -392,7 +392,7 @@ var getTeamEntries = function(game) {
 var getSoloEntries = function(game) {
     $.get("api/entries/"+game.rowid, function(entries) {
         if (entries.length == 0) {
-            return $('#entries').append('<p class="flow-text">Aucune inscription pour le moment.</p>');
+            return $('#entries').append('<p class="flow-text center">Aucune inscription pour le moment.</p>');
         }
         var l_edit, l_delete, items = $('<tbody></tbody>');
         $.each(entries, function(i, player) {
