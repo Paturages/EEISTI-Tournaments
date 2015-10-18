@@ -356,32 +356,36 @@ var getTeamEntries = function(game) {
             // Append header
             item.append('<div class="collapsible-header"><i class="mdi-social-group"></i>'+team.name+(game.multicampus > 0 ? ' ('+team.campus+')' : '')+'<span class="right">'+dateFormat(new Date(+team.time*1000))+' &nbsp; <label class="right hide-on-small-only">Cliquer pour dérouler</label></span></div>');
 
-            var table = $('<table><thead><tr><th>Nom</th><th>'+game.nickname_field+'</th>'+(game.multicampus > 0 ? '<th>Campus</th>' : '')+'<th>Date d\'inscription</th></tr></thead></table>');
-            var l_edit, l_delete, players = $('<tbody></tbody>');
+            var trow = $('<tr><th>Nom</th><th>'+game.nickname_field+'</th>'+(game.multicampus > 0 ? '<th>Campus</th>' : '')+'<th>Date d\'inscription</th></tr>');
+            var l_edit = $('<th><a href="#"><i class="mdi-content-create circle blue"></i></a></th>').click(function() {
+                edit_user = team;
+                initializeForm();
+            });
+            var l_delete = $('<th><a href="#"><i class="mdi-content-clear circle red"></i></a></th>').click(function() {
+                edit_user = team;
+
+                $('#verify-forgot').click(function() {
+                    $('#verify-form').closeModal();
+                    triggerWhat = forgotSubmit;
+                    $('forgot-form').openModal();
+                });
+
+                triggerWhat = verifySubmit;
+                $('#verify-form').openModal({
+                    complete: function() {
+                        edit_user = {};
+                        $("#verify-password").val('');
+                        $("#verify-errors").empty();
+                    }
+                });
+            });
+            trow.append(l_edit).append(l_delete);
+            var table = $('<table></table>');
+            table.append($('<thead></thead>').append(trow));
+
+            var players = $('<tbody></tbody>');
             $.each(team.players, function(j, player) {
-                l_edit = $('<td><a href="#"><i class="mdi-content-create circle blue"></i></a></td>').click(function() {
-                    edit_user = team;
-                    initializeForm();
-                });
-                l_delete = $('<td><a href="#"><i class="mdi-content-clear circle red"></i></a></td>').click(function() {
-                    edit_user = team;
-
-                    $('#verify-forgot').click(function() {
-                        $('#verify-form').closeModal();
-                        triggerWhat = forgotSubmit;
-                        $('forgot-form').openModal();
-                    });
-
-                    triggerWhat = verifySubmit;
-                    $('#verify-form').openModal({
-                        complete: function() {
-                            edit_user = {};
-                            $("#verify-password").val('');
-                            $("#verify-errors").empty();
-                        }
-                    });
-                });
-                players.append($('<tr><td>'+player.real_name+'</td><td>'+player.name+'</td>'+(game.multicampus > 0 ? '<td>'+player.campus+'</td>' : '')+'<td>'+dateFormat(new Date(+player.time*1000))+'</td></tr>').append(l_edit).append(l_delete));
+                players.append($('<tr><td>'+player.real_name+'</td><td>'+player.name+'</td>'+(game.multicampus > 0 ? '<td>'+player.campus+'</td>' : '')+'<td>'+dateFormat(new Date(+player.time*1000))+'</td></tr>'));
             });
             items.append(item.append($('<div class="collapsible-body"></div>').append(table.append(players))));
         });
@@ -447,3 +451,6 @@ $.get("api/games", function(data) {
         );
     });
 });
+
+// Forcing submits for verify form, which doesn't work normally for some reason
+$('#verify-submit').click(verifySubmit);

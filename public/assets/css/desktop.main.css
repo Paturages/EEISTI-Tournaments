@@ -26,3 +26,8 @@ i.circle {
 #solo-errors, #team-errors, #verify-errors, #forgot-errors {
     color: red;
 }
+#slide-out li a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
