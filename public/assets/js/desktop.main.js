@@ -432,14 +432,21 @@ var getSoloEntries = function(game) {
 // Loads games
 $.get("api/games", function(data) {
     $.each(data, function(i, link) {
+
+        //Add promoted class to game entry if it has promoted=true in DB
+        var node ='<li' +((link.promoted)? " class = \"promoted\" " : "")+'><a href="#">'
+                    +((link.promoted)? "<i class=\"mdi-av-new-releases left\"></i>" : "") + link.name+'</a></li>';      
+        
         // Appends the games to the sidebar
-        $("#slide-out").append(
+        $("#slide-out").append(      
             // Shows the game entries on click
-            $('<li><a href="#">'+link.name+'</a></li>').click(function() {
+            $(node).click(function() {
                 $(this).siblings().removeClass("active");
                 $(this).addClass("active");
+                //add paragraph of description (if in db)
+                $('#welcome').html($( ((link.desc)? '<p>'+link.desc+'</p>' : "")
                 // Signup button: shows the right modal on click
-                $('#welcome').html($('<br/><div class="col s12"></div>'));
+                +'<br/><div class="col s12"></div>'));
                 $('#welcome div').append($('<button class="waves-effect waves-light btn large"><i class="mdi-social-group-add left"></i> S\'inscrire</button>').click(initializeForm));
                 $('#entries').empty();
                 current_game = link;

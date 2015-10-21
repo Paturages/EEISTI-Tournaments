@@ -28,7 +28,7 @@
     <main>
         <div id="welcome" class="row center">
             <div class="col s12 flow-text">
-                <p>Bienvenue aux inscriptions aux tournois E-EISTI. Veuillez choisir un jeu dans le menu de gauche.</p>
+                <p>Bienvenue aux inscriptions aux tournois E-EISTI. Veuillez choisir un jeu/évènement dans le menu de gauche.</p>
                 <img class="responsive-img" src="assets/img/eeisti.png" />
             </div>
         </div>
