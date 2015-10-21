@@ -352,10 +352,15 @@ var getTeamEntries = function(game) {
 
         var items = $('<ul class="collapsible" data-collapsible="expandable"></ul>');
         $.each(entries, function(i, team) {
-            var item = $('<li class="collection-item avatar"></li>');
-            // Append header
-            item.append('<div class="collapsible-header"><i class="mdi-social-group"></i>'+team.name+(game.multicampus > 0 ? ' ('+team.campus+')' : '')+'<span class="right">'+dateFormat(new Date(+team.time*1000))+' &nbsp; <label class="right hide-on-small-only">Cliquer pour dérouler</label></span></div>');
-
+            var item = $('<li class="collection-item avatar"></li>')
+                .append(
+                    $('<div class="collapsible-header"/>')
+                        .append($('<i class="mdi-social-group"></i>'))
+                        .append($('<span/>').text(team.name+(game.multicampus > 0 ? ' ('+team.campus+')' : '')))
+                        .append($('<span class="right">'+dateFormat(new Date(+team.time*1000))+' &nbsp; <label class="right hide-on-small-only">Cliquer pour dérouler</label></span>'))
+                )
+            ;
+            
             var trow = $('<tr><th>Nom</th><th>'+game.nickname_field+'</th>'+(game.multicampus > 0 ? '<th>Campus</th>' : '')+'<th>Date d\'inscription</th></tr>');
             var l_edit = $('<th><a href="#"><i class="mdi-content-create circle blue"></i></a></th>').click(function() {
                 edit_user = team;
@@ -383,9 +388,19 @@ var getTeamEntries = function(game) {
             var table = $('<table></table>');
             table.append($('<thead></thead>').append(trow));
 
-            var players = $('<tbody></tbody>');
+            var row, players = $('<tbody></tbody>');
             $.each(team.players, function(j, player) {
-                players.append($('<tr><td>'+player.real_name+'</td><td>'+player.name+'</td>'+(game.multicampus > 0 ? '<td>'+player.campus+'</td>' : '')+'<td>'+dateFormat(new Date(+player.time*1000))+'</td></tr>'));
+                row = $('<tr/>')
+                    .append($('<td/>').text(player.real_name))
+                    .append($('<td/>').text(player.name))
+                ;
+                if (game.multicampus > 0)
+                    row.append($('<td/>').text(player.campus));
+                row
+                    .append($('<td/>').text(dateFormat(new Date(+player.time*1000))))
+                ;
+                players.append(row);
+                //players.append($('<tr><td>'+player.real_name+'</td><td>'+player.name+'</td>'+(game.multicampus > 0 ? '<td>'+player.campus+'</td>' : '')+'<td>'+dateFormat(new Date(+player.time*1000))+'</td></tr>'));
             });
             items.append(item.append($('<div class="collapsible-body"></div>').append(table.append(players))));
         });
@@ -398,7 +413,7 @@ var getSoloEntries = function(game) {
         if (entries.length == 0) {
             return $('#entries').append('<p class="flow-text center">Aucune inscription pour le moment.</p>');
         }
-        var l_edit, l_delete, items = $('<tbody></tbody>');
+        var l_edit, l_delete, row, items = $('<tbody></tbody>');
         $.each(entries, function(i, player) {
             l_edit = $('<td><a href="#"><i class="mdi-content-create circle blue"></i></a></td>').click(function() {
                 edit_user = player;
@@ -422,7 +437,19 @@ var getSoloEntries = function(game) {
                     }
                 });
             });
-            items.append($('<tr><td>'+player.real_name+'</td><td>'+player.name+'</td>'+(game.multicampus > 0 ? '<td>'+player.campus+'</td>' : '')+'<td>'+dateFormat(new Date(+player.time*1000))+'</td></tr>').append(l_edit).append(l_delete));
+
+            row = $('<tr/>')
+                .append($('<td/>').text(player.real_name))
+                .append($('<td/>').text(player.name))
+            ;
+            if (game.multicampus > 0)
+                row.append($('<td/>').text(player.campus));
+            row
+                .append($('<td/>').text(dateFormat(new Date(+player.time*1000))))
+                .append(l_edit)
+                .append(l_delete)
+            ;
+            items.append(row);
         });
         $("#entries").append('<table><thead><tr><th>Nom</th><th>'+game.nickname_field+'</th>'+(game.multicampus > 0 ? '<th>Campus</th>' : '')+'<th>Date d\'inscription</th><th></th><th></th></tr></thead></table>');
         $("#entries table").append(items);
