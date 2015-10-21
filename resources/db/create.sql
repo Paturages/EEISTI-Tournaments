@@ -7,7 +7,9 @@ CREATE TABLE Games (
 	name TEXT,
 	num_players INTEGER,
 	nickname_field TEXT,
-	multicampus INTEGER
+	multicampus INTEGER,
+	promoted BOOLEAN,
+	desc TEXT
 );
 
 CREATE TABLE Entries (

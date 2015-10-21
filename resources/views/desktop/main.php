@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
     <link rel="stylesheet" href="assets/css/desktop.main.css">
     <title>E-EISTI : Inscriptions</title>
+    <meta name="viewport" content="width=device-width">
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="#0D47A1">
 </head>
 <body>
     <header>
@@ -25,7 +28,7 @@
     <main>
         <div id="welcome" class="row center">
             <div class="col s12 flow-text">
-                <p>Bienvenue aux inscriptions aux tournois E-EISTI. Veuillez choisir un jeu dans le menu de gauche.</p>
+                <p>Bienvenue aux inscriptions aux tournois E-EISTI. Veuillez choisir un jeu/évènement dans le menu de gauche.</p>
                 <img class="responsive-img" src="assets/img/eeisti.png" />
             </div>
         </div>
@@ -40,11 +43,11 @@
             <div id="solo-errors"></div>
             <div class="input-field">
                 <label for="solo-real-name">Nom</label>
-                <input type="text" id="solo-real-name" name="solo-real-name" />
+                <input type="text" id="solo-real-name" name="solo-real-name" length="100"/>
             </div>
             <div class="input-field">
                 <label for="solo-name" id="solo-nickname-field">Pseudonyme</label>
-                <input type="text" id="solo-name" name="solo-name" />
+                <input type="text" id="solo-name" name="solo-name" length="100"/>
             </div>
             <div class="row input-field" id="solo-campus">
                 <label>Campus</label><br/><br/>
@@ -80,7 +83,7 @@
             <div id="team-errors"></div>
             <div class="input-field">
                 <label for="team-name">Nom de l'équipe</label>
-                <input type="text" id="team-name" name="team-name" />
+                <input type="text" id="team-name" name="team-name" length="100"/>
             </div>
             <div class="row input-field" id="team-campus">
                 <label>Campus</label><br/><br/>
@@ -112,11 +115,11 @@
                     <label>Joueur 1</label>
                     <div class="input-field">
                         <label for="player-real-name-1">Nom</label>
-                        <input type="text" id="player-real-name-1" class="player-real-name"/>
+                        <input type="text" id="player-real-name-1" class="player-real-name" length="100"/>
                     </div>
                     <div class="input-field">
                         <label class="player-nickname-field" for="player-name-1">Pseudonyme</label>
-                        <input type="text" id="player-name-1" class="player-name"/>
+                        <input type="text" id="player-name-1" class="player-name" length="100"/>
                     </div>
                     <div class="switch input-field">
                         <label>Cergy<input type="checkbox" class="player-campus"><span class="lever"></span>Pau</label>
